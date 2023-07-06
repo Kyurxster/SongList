@@ -9,6 +9,4 @@
     <string name="title">Title</string>
     <string name="insert">Insert</string>
     <string name="show_list">Show List</string>
-    <string name="delete">Delete Song</string>
-    <string name="delete_hint">Enter full song title here</string>
 </resources>
