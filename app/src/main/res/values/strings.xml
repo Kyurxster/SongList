@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Song List</string>
+    <string name="star">Stars</string>
+    <string name="year_hint">Enter year of release here</string>
+    <string name="year">Year</string>
+    <string name="singers_hint">Enter singers\' name here</string>
+    <string name="singers">Singers</string>
+    <string name="title_hint">Enter song title here</string>
+    <string name="title">Title</string>
+    <string name="insert">Insert</string>
+    <string name="show_list">Show List</string>
+    <string name="delete">Delete Song</string>
+    <string name="delete_hint">Enter full song title here</string>
+</resources>
