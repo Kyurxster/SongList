@@ -3,8 +3,8 @@
     <string name="star">Stars</string>
     <string name="year_hint">Enter year of release here</string>
     <string name="year">Year</string>
-    <string name="singers_hint">Enter singers\' name here</string>
-    <string name="singers">Singers</string>
+    <string name="singers_hint">Enter singer(s)\' name here</string>
+    <string name="singers">Singer(s)</string>
     <string name="title_hint">Enter song title here</string>
     <string name="title">Title</string>
     <string name="insert">Insert</string>

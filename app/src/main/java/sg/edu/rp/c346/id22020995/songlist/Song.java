@@ -33,6 +33,9 @@ public class Song {
 
     @Override
     public String toString() {
-        return title + "\n" + singers + "\n" + year + "\n" + stars;
+        return "Title: " + title + "\n"
+                + "Singer(s): " + singers + "\n"
+                + "Year of Release: " + year + "\n"
+                + "Rating: " + stars + " stars";
     }
 }
