@@ -39,7 +39,8 @@ public class EditSong extends AppCompatActivity {
         Intent intentReceived = getIntent();
         song = (Song) intentReceived.getSerializableExtra("song");
 
-        etID.setText(""+song.get_id());
+        id = song.get_id();
+        etID.setText(""+id);
         etTitle.setText(song.getTitle());
         etSingers.setText(song.getSingers());
         etYear.setText(""+song.getYear());
@@ -57,6 +58,31 @@ public class EditSong extends AppCompatActivity {
 
         db = new DBHelper(EditSong.this);
 
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DBHelper dbh = new DBHelper(EditSong.this);
+
+                title = etTitle.getText().toString();
+                singers = etSingers.getText().toString();
+                year = Integer.parseInt(etYear.getText().toString());
+
+                if (rgStars.getCheckedRadioButtonId()==R.id.radioButton1){
+                    stars = 1;
+                } else if (rgStars.getCheckedRadioButtonId()==R.id.radioButton2){
+                    stars = 2;
+                } else if (rgStars.getCheckedRadioButtonId()==R.id.radioButton3){
+                    stars = 3;
+                } else if (rgStars.getCheckedRadioButtonId()==R.id.radioButton4){
+                    stars = 4;
+                } else if (rgStars.getCheckedRadioButtonId()==R.id.radioButton5){
+                    stars = 5;
+                }
+                Song newSong = new Song (id, title, singers, year, stars);
+                dbh.updateSong(newSong);
+                finish();
+            }
+        });
 
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
