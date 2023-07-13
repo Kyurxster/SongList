@@ -44,9 +44,10 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop older table if existed
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_SONGS);
+        //db.execSQL("DROP TABLE IF EXISTS " + TABLE_SONGS);
         // Create table(s) again
-        onCreate(db);
+        //onCreate(db);
+        db.execSQL("ALTER TABLE " + TABLE_SONGS + " ADD COLUMN  module_name TEXT ");
     }
 
     public void insertSong(String title, String singers, int years, int stars){
