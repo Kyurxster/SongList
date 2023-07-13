@@ -70,8 +70,7 @@ public class MainActivity extends AppCompatActivity {
         btnShowList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SongList.class);
-                startActivity(intent);
+                finish();
             }
         });
     }

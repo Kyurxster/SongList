@@ -36,9 +36,8 @@ public class SongList extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(SongList.this, MainActivity.class);
-//                startActivity(intent);
-                finish();
+                Intent intent = new Intent(SongList.this, MainActivity.class);
+                startActivity(intent);
             }
         });
 
