@@ -1,6 +1,8 @@
 package sg.edu.rp.c346.id22020995.songlist;
 
-public class Song {
+import java.io.Serializable;
+
+public class Song implements Serializable {
     private int _id;
     private String title;
     private String singers;

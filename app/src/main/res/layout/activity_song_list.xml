@@ -9,7 +9,27 @@
         android:id="@+id/buttonBack"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Back" />
+        android:text="@string/add_new_song" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/buttonAll"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/show_all_songs" />
+
+        <Button
+            android:id="@+id/button5stars"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/show_5star_songs" />
+    </LinearLayout>
 
     <ListView
         android:id="@+id/listViewSongs"

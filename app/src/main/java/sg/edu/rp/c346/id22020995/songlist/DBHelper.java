@@ -92,11 +92,77 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         return songs;
     }
-    public void deleteSong(int row) {
+
+    public int updateSong(Song data) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("title", data.getTitle());
+        values.put("singers",data.getSingers());
+        values.put("year", data.getYear());
+        values.put("stars", data.getStars());
+        String condition = COLUMN_ID + "= ?";
+        String[] args = {String.valueOf(data.get_id())};
+        int result = db.update(TABLE_SONGS, values, condition, args);
+        db.close();
+
+        return result;
+    }
+
+    public int deleteSong(int id) {
 
         // Deletes a row given its rowId, but I want to be able to pass
         // in the name of the KEY_NAME and have it delete that row.
         SQLiteDatabase db = this.getReadableDatabase();
-        db.delete(TABLE_SONGS, COLUMN_ID + "=" + row, null);
+        String condition = COLUMN_ID + "= ?";
+        String[] args = {String.valueOf(id)};
+        int result = db.delete(TABLE_SONGS, condition, args);
+
+        return result;
+    }
+
+    public ArrayList<Song> get5starSongs(){
+        ArrayList<Song> songs = new ArrayList<Song>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] columns = {COLUMN_ID, COLUMN_TITLE, COLUMN_SINGERS, COLUMN_YEAR, COLUMN_STARS};
+        Cursor cursor = db.query(TABLE_SONGS, columns, null, null, null, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                int id = cursor.getInt(0);
+                String title = cursor.getString(1);
+                String singers = cursor.getString(2);
+                int year = cursor.getInt(3);
+                int stars = cursor.getInt(4);
+                if (stars==5){
+                    Song obj = new Song(id, title, singers, year, stars);
+                    songs.add(obj);
+                }
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return songs;
+    }
+    public Song findSong(int searchID) {
+        Song song = new Song(0,"","",0,0);
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] columns = {COLUMN_ID, COLUMN_TITLE, COLUMN_SINGERS, COLUMN_YEAR, COLUMN_STARS};
+        Cursor cursor = db.query(TABLE_SONGS, columns, null, null, null, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                int id = cursor.getInt(0);
+                String title = cursor.getString(1);
+                String singers = cursor.getString(2);
+                int year = cursor.getInt(3);
+                int stars = cursor.getInt(4);
+                if (id==searchID){
+                    song = new Song(id, title, singers, year, stars);
+                }
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return song;
     }
 }

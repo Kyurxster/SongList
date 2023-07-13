@@ -9,4 +9,11 @@
     <string name="title">Title</string>
     <string name="insert">Insert</string>
     <string name="show_list">Show List</string>
+    <string name="show_5star_songs">Show All 5 star songs</string>
+    <string name="add_new_song">Add New Song</string>
+    <string name="song_id">Song ID</string>
+    <string name="delete">Delete</string>
+    <string name="update">Update</string>
+    <string name="cancel">Cancel</string>
+    <string name="show_all_songs">Show all songs</string>
 </resources>
