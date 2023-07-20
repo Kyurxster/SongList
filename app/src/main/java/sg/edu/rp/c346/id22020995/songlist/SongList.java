@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class SongList extends AppCompatActivity {
     Button btnBack, btnAll, btn5stars;
     ListView lvSongs;
     ArrayList<Song> songList;
+    Spinner spnYear;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,7 @@ public class SongList extends AppCompatActivity {
         lvSongs = findViewById(R.id.listViewSongs);
         btnAll = findViewById(R.id.buttonAll);
         btn5stars = findViewById(R.id.button5stars);
+        spnYear = findViewById(R.id.spinner);
 
         DBHelper db = new DBHelper(SongList.this);
         songList = new ArrayList<Song>();
@@ -45,7 +48,7 @@ public class SongList extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 songList = db.getSongs();
-                ArrayAdapter aaSongs = new ArrayAdapter<>(SongList.this, android.R.layout.simple_list_item_1, songList);
+                CustomAdapter aaSongs = new CustomAdapter(SongList.this, R.layout.row, songList);
                 lvSongs.setAdapter(aaSongs);
             }
         });
@@ -54,7 +57,7 @@ public class SongList extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 songList = db.get5starSongs();
-                ArrayAdapter aaSongs = new ArrayAdapter<>(SongList.this, android.R.layout.simple_list_item_1, songList);
+                CustomAdapter aaSongs = new CustomAdapter(SongList.this, R.layout.row, songList);
                 lvSongs.setAdapter(aaSongs);
             }
         });
@@ -70,10 +73,46 @@ public class SongList extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        spnYear.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                int year = 0;
+                if (position == 0){
+                    year = 2023;
+                } else if (position == 1){
+                    year = 2022;
+                } else if (position == 2){
+                    year = 2021;
+                } else if (position == 3){
+                    year = 2020;
+                } else if (position == 4){
+                    year = 2019;
+                }
+                songList = db.findSongByYear(year);
+                CustomAdapter aaSongs = new CustomAdapter(SongList.this, R.layout.row, songList);
+                lvSongs.setAdapter(aaSongs);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                songList = db.getSongs();
+                CustomAdapter aaSongs = new CustomAdapter(SongList.this, R.layout.row, songList);
+                lvSongs.setAdapter(aaSongs);
+            }
+        });
     }
+
     @Override
     protected void onResume() {
         super.onResume();
+
+        btnAll.performClick();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
 
         btnAll.performClick();
     }
